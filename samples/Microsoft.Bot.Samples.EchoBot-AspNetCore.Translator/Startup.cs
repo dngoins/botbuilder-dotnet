@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest.TransientFaultHandling;
 
-namespace Microsoft.Bot.Samples.Echo.AspNetCore
+namespace Microsoft.Bot.Samples.Echo.AspNetCore.Translator
 {
     public class Startup
     {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Builder.Core.Extensions;
 
-namespace Microsoft.Bot.Samples.Echo.AspNetCore
+namespace Microsoft.Bot.Samples.Echo.AspNetCore.Translator
 {
     class CurrentUserState
     {

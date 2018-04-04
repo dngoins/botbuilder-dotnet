@@ -4,7 +4,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Microsoft.Bot.Samples.Echo.AspNetCore
+namespace Microsoft.Bot.Samples.Echo.AspNetCore.Translator
 {
     public class Program
     {

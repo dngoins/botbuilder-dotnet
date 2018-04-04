@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>Microsoft.Bot.Samples.Echo.AspNetCore</RootNamespace>
+    <RootNamespace>Microsoft.Bot.Samples.Echo.AspNetCore.Translator</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
