@@ -350,7 +350,15 @@ namespace Microsoft.Bot.Builder.Ai
                         {
 
                             string translation = xe.Element(ns + "TranslatedText").Value;
-                            translation = _postProcessor.FixTranslation(translateArraySourceTexts[sentIndex], xe.Element(ns + "Alignment").Value, translation);
+                            try
+                            {
+                                translation = _postProcessor.FixTranslation(translateArraySourceTexts[sentIndex], xe.Element(ns + "Alignment").Value, translation);
+                            }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine($"FixTranslation Error: {ex}");
+                            }
+
                             results.Add(translation.Trim());
                         }
                         return results.ToArray();
