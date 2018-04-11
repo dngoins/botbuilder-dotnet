@@ -21,7 +21,7 @@ namespace Microsoft.Bot.Builder.Core.Extensions
     /// <para>See the channel's documentation for limits imposed upon the contents of
     /// the text of the message to send.</para>
     /// <para>To control various characteristics of your bot's speech such as voice,
-    /// rate, volume, pronunciation, and pitch, specify test to speak in
+    /// rate, volume, pronunciation, and pitch, specify the text to speak in
     /// Speech Synthesis Markup Language (SSML) format.</para>
     /// <para>
     /// Channels decide how each card action manifests in their user experience. 
