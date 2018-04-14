@@ -11,14 +11,14 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>true</DelaySign>
     <AssemblyOriginatorKeyFile>..\..\build\35MSSharedLib1024.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup>
-	<TargetFramework>netstandard2.0</TargetFramework>
-	<PackageId>Microsoft.Bot.Builder.Ai.LUIS</PackageId>
+	  <TargetFramework>netstandard2.0</TargetFramework>
+	  <PackageId>Microsoft.Bot.Builder.Ai.LUIS</PackageId>
     <Description>LUIS Middleware and Recognizers for the Microsoft Bot Builder SDK</Description>
     <Summary>This library implements C# classes for building bots using LUIS.</Summary>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -35,6 +35,7 @@
     <RepositoryType />
     <PackageTags>bots;ai;botframework;botbuilder;luis</PackageTags>
     <NeutralLanguage />
+    <PackageOutputPath Condition="'$(SolutionDir)' != ''">$(SolutionDir)\artifacts\$(Configuration)\packages</PackageOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(Configuration) == 'Debug - NuGet Packages'">
