@@ -309,14 +309,10 @@ namespace Microsoft.Bot.Builder.Classic.Tests
             echo = echo.WithScorable(scorable);
 
             using (var container = Build(Options.ResolveDialogFromContainer, scorable))
+            using (var scope = container.BeginLifetimeScope(
+                builder => builder.RegisterInstance(echo).As<IDialog<object>>()))
             {
-                var builder = new ContainerBuilder();
-                builder
-                    .RegisterInstance(echo)
-                    .As<IDialog<object>>();
-                builder.Update(container);
-
-                await AssertScriptAsync(container,
+                await AssertScriptAsync(scope,
                     "hello",
                     "echo: hello",
                     "10",
@@ -362,17 +358,14 @@ namespace Microsoft.Bot.Builder.Classic.Tests
             }.Fold();
 
             using (var container = Build(Options.ResolveDialogFromContainer))
+            using (var scope = container.BeginLifetimeScope(
+                builder =>
+                {
+                    builder.RegisterInstance(echo).As<IDialog<object>>();
+                    builder.RegisterInstance(scorable).As<IScorable<IResolver, double>>();
+                }))
             {
-                var builder = new ContainerBuilder();
-                builder
-                    .RegisterInstance(echo)
-                    .As<IDialog<object>>();
-                builder
-                    .RegisterInstance(scorable)
-                    .As<IScorable<IResolver, double>>();
-                builder.Update(container);
-
-                await AssertScriptAsync(container,
+                await AssertScriptAsync(scope,
                     "hello",
                     "echo: hello",
                     "triggerA",
@@ -414,14 +407,10 @@ namespace Microsoft.Bot.Builder.Classic.Tests
             echo = echo.WithScorable(scorable);
 
             using (var container = Build(Options.ResolveDialogFromContainer))
+            using (var scope = container.BeginLifetimeScope(
+                builder => builder.RegisterInstance(echo).As<IDialog<object>>()))
             {
-                var builder = new ContainerBuilder();
-                builder
-                    .RegisterInstance(echo)
-                    .As<IDialog<object>>();
-                builder.Update(container);
-
-                await AssertScriptAsync(container,
+                await AssertScriptAsync(scope,
                     "hello",
                     "echo: hello",
                     "calculate 2 + 3",
@@ -450,14 +439,10 @@ namespace Microsoft.Bot.Builder.Classic.Tests
             echo = echo.WithScorable(scorable);
 
             using (var container = Build(Options.ResolveDialogFromContainer))
+            using (var scope = container.BeginLifetimeScope(
+                builder => builder.RegisterInstance(echo).As<IDialog<object>>()))
             {
-                var builder = new ContainerBuilder();
-                builder
-                    .RegisterInstance(echo)
-                    .As<IDialog<object>>();
-                builder.Update(container);
-
-                await AssertScriptAsync(container,
+                await AssertScriptAsync(scope,
                     "hello",
                     "echo: hello",
                     "calculate 2 + 3",
@@ -478,17 +463,14 @@ namespace Microsoft.Bot.Builder.Classic.Tests
             var echo = Chain.PostToChain().Select(msg => $"echo: {msg.Text}").PostToUser().Loop();
 
             using (var container = Build(Options.ResolveDialogFromContainer))
+            using (var scope = container.BeginLifetimeScope(
+                builder =>
+                {
+                    builder.RegisterInstance(echo).As<IDialog<object>>();
+                    builder.Register(c => new CalculatorScorable(c.Resolve<IDialogStack>(), new Regex(@".*calculate\s*(.*)"))).As<IScorable<IActivity, double>>();
+                }))
             {
-                var builder = new ContainerBuilder();
-                builder
-                    .RegisterInstance(echo)
-                    .As<IDialog<object>>();
-                builder
-                    .Register(c => new CalculatorScorable(c.Resolve<IDialogStack>(), new Regex(@".*calculate\s*(.*)")))
-                    .As<IScorable<IActivity, double>>();
-                builder.Update(container);
-
-                await AssertScriptAsync(container,
+                await AssertScriptAsync(scope,
                     "hello",
                     "echo: hello",
                     "calculate 2 + 3",
